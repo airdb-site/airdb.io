@@ -1,0 +1,147 @@
+---
+import "../styles/product.css";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path for canonical URL, e.g. "/docs/" */
+  path?: string;
+  ogImage?: string;
+}
+
+const { title, description, path = "/", ogImage = "/og/home.png" } = Astro.props;
+const site = Astro.site ?? new URL("https://airdb.io");
+const canonical = new URL(path, site).href;
+const ogImageUrl = new URL(ogImage, site).href;
+
+const NAV = [
+  { label: "Platform", href: "/#platform" },
+  { label: "Data API", href: "/#api" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Docs", href: "/docs/" },
+];
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "AirDB",
+  url: site.href,
+  logo: new URL("/icons/icon-512.png", site).href,
+  description:
+    "AirDB is an enterprise data platform: cloud database tools, industry data APIs, and agriculture analytics SaaS.",
+  parentOrganization: { "@type": "Organization", name: "AirDB Group", url: "https://airdb.group" },
+  contactPoint: { "@type": "ContactPoint", contactType: "sales", email: "sales@airdb.io" },
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AirDB" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icons/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/icons/icon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <link rel="preload" href="/fonts/fraunces-var-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fraunces-var-italic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ibm-plex-sans-var-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ibm-plex-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="topbar">
+      <div class="shell topbar-inner" id="topbar">
+        <a class="wordmark" href="/">
+          <span class="wordmark-glyph" aria-hidden="true">▚</span>
+          air<em>db</em>
+        </a>
+        <nav class="topnav" id="site-nav" aria-label="Primary">
+          {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+        </nav>
+        <button class="nav-toggle mono" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <div class="topbar-actions">
+          <a class="group-link" href="https://airdb.group" rel="noopener">AirDB Group ↗</a>
+          <a class="btn btn-solid btn-sm" href="/get-access/">Get API access</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-grid">
+        <div class="footer-brand">
+          <p class="wordmark">air<em>db</em></p>
+          <p>
+            AirDB is the data-products arm of <a href="https://airdb.group" rel="noopener">AirDB Group</a>,
+            building digital infrastructure for agriculture and supply chains.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3>Product</h3>
+          <a href="/#platform">Platform</a>
+          <a href="/#api">Data API</a>
+          <a href="/#pricing">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h3>Developers</h3>
+          <a href="/docs/">Documentation</a>
+          <a href="/docs/#datasets">Dataset catalog</a>
+          <a href="/docs/#sdks">SDKs</a>
+        </div>
+        <div class="footer-col">
+          <h3>Company</h3>
+          <a href="https://airdb.group" rel="noopener">AirDB Group ↗</a>
+          <a href="/get-access/">Get API access</a>
+          <a href="mailto:sales@airdb.io">Contact sales</a>
+        </div>
+      </div>
+      <div class="shell footer-legal">
+        <span>© 2026 AirDB. All rights reserved.</span>
+        <a href="mailto:sales@airdb.io">sales@airdb.io</a>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+      const bar = document.getElementById("topbar");
+      toggle?.addEventListener("click", () => {
+        const open = bar?.classList.toggle("nav-open") ?? false;
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.textContent = open ? "Close" : "Menu";
+      });
+      // Close the mobile panel after navigating to an anchor
+      document.querySelectorAll("#site-nav a").forEach((a) =>
+        a.addEventListener("click", () => {
+          bar?.classList.remove("nav-open");
+          toggle?.setAttribute("aria-expanded", "false");
+          if (toggle) toggle.textContent = "Menu";
+        })
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+---
+import ProductLayout from "../layouts/ProductLayout.astro";
+---
+
+<ProductLayout
+  title="Page not found — AirDB"
+  description="The page you were looking for does not exist."
+  path="/404"
+>
+  <div class="shell notfound">
+    <p class="status-line">HTTP/2 404 · no rows matched your query</p>
+    <h1>This page is <span class="ital">off the map.</span></h1>
+    <p>
+      The URL may have moved, or it never existed. Try the homepage, browse the
+      documentation, or write to us and we will point you in the right direction.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="/">Back to home</a>
+      <a class="btn btn-ghost" href="/docs/">Documentation</a>
+    </div>
+  </div>
+</ProductLayout>
