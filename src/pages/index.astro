@@ -1,0 +1,741 @@
+---
+// airdb.io — enterprise data SaaS landing page (English, global audience).
+// Self-contained: own document shell, scoped styles, no BaseLayout dependency.
+const YEAR = 2026;
+
+const NAV = [
+  { label: "Platform", href: "#platform" },
+  { label: "Data API", href: "#api" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Docs", href: "#docs" },
+];
+
+const STATS = [
+  { value: "2.4B+", label: "data points under management" },
+  { value: "140+", label: "commodity & industry datasets" },
+  { value: "99.95%", label: "uptime SLA on paid plans" },
+  { value: "<80ms", label: "p95 API latency, global edge" },
+];
+
+const CAPABILITIES = [
+  {
+    no: "01",
+    title: "AirDB Cloud Tables",
+    copy: "Managed cloud database tooling for operational and analytical workloads — schema versioning, branching, and point-in-time restore without a DBA on staff.",
+  },
+  {
+    no: "02",
+    title: "Data API",
+    copy: "REST and bulk endpoints over curated industry datasets. Typed schemas, cursor pagination, and webhooks — designed to be integrated in an afternoon.",
+  },
+  {
+    no: "03",
+    title: "Agriculture Data SaaS",
+    copy: "Price indices, yield and weather series, and supply-chain signals for agri enterprises — from field-level telemetry to shelf-level demand.",
+  },
+  {
+    no: "04",
+    title: "Industry Data Hub",
+    copy: "A governed data middle-platform for your organization: ingestion, entity resolution, and quality rules that turn scattered spreadsheets into one source of truth.",
+  },
+  {
+    no: "05",
+    title: "Managed Collection",
+    copy: "Compliant, monitored data acquisition pipelines run by our team — public registries, market boards, and partner feeds delivered as clean tables.",
+  },
+  {
+    no: "06",
+    title: "Visual Analytics",
+    copy: "Dashboards and embeddable charts on top of every dataset. Share a live view with a customer or drop a chart into your own product via iframe or SDK.",
+  },
+];
+
+const PLANS = [
+  {
+    name: "Developer",
+    price: "$0",
+    period: "forever",
+    tagline: "For prototypes and side projects.",
+    features: [
+      "10,000 API calls / month",
+      "Community datasets",
+      "2 cloud tables, 1 GB storage",
+      "Community support",
+    ],
+    cta: "Start free",
+    featured: false,
+  },
+  {
+    name: "Team",
+    price: "$99",
+    period: "per month",
+    tagline: "For products in production.",
+    features: [
+      "1M API calls / month, then metered",
+      "Premium datasets & bulk export",
+      "Unlimited tables, 100 GB storage",
+      "Dashboards & embedded charts",
+      "Email support, 99.95% SLA",
+    ],
+    cta: "Start 14-day trial",
+    featured: true,
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    period: "annual",
+    tagline: "For data platforms at scale.",
+    features: [
+      "Unlimited scale, private rate limits",
+      "Dedicated collection pipelines",
+      "Data hub co-build & onboarding",
+      "VPC / on-prem deployment",
+      "Solution engineer & custom SLA",
+    ],
+    cta: "Talk to sales",
+    featured: false,
+  },
+];
+
+const DOCS = [
+  { title: "Quickstart", copy: "First API call in five minutes — auth, your first query, and pagination.", href: "/cc/post/", tag: "guide" },
+  { title: "API Reference", copy: "Every endpoint, parameter, and error code. Generated from the live schema.", href: "/cc/post/", tag: "reference" },
+  { title: "Dataset Catalog", copy: "Browse 140+ datasets with coverage maps, update cadence, and sample rows.", href: "/cc/post/", tag: "catalog" },
+  { title: "SDKs", copy: "Official clients for Python, TypeScript, and Go. Community wrappers welcome.", href: "/cc/post/", tag: "libraries" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AirDB — Enterprise data platform & agriculture data APIs</title>
+    <meta
+      name="description"
+      content="AirDB is an enterprise data platform: cloud database tools, industry data APIs, and agriculture analytics SaaS for developers and technical teams worldwide."
+    />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#platform">Skip to content</a>
+
+    <header class="topbar">
+      <div class="shell topbar-inner">
+        <a class="wordmark" href="/">
+          <span class="wordmark-glyph" aria-hidden="true">▚</span>
+          air<em>db</em>
+        </a>
+        <nav class="topnav" aria-label="Primary">
+          {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+        </nav>
+        <div class="topbar-actions">
+          <a class="group-link" href="https://airdb.group" rel="noopener">AirDB Group ↗</a>
+          <a class="btn btn-solid btn-sm" href="#pricing">Get API access</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <div class="hero-field" aria-hidden="true"></div>
+        <div class="shell hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow reveal">AirDB Cloud · Data platform for the physical economy</p>
+            <h1 class="reveal">
+              Field-level data,<br />
+              <span class="ital">enterprise-grade</span> decisions.
+            </h1>
+            <p class="lede reveal">
+              Cloud database tools, curated industry datasets, and agriculture analytics —
+              delivered as clean APIs your team can ship on. From soil to shelf, one data layer.
+            </p>
+            <div class="hero-actions reveal">
+              <a class="btn btn-solid" href="#pricing">Get API access</a>
+              <a class="btn btn-ghost" href="#docs">Read the docs</a>
+            </div>
+            <p class="hero-note reveal">
+              Free tier · No credit card · <span class="mono">api.airdb.io</span>
+            </p>
+          </div>
+
+          <figure class="terminal reveal" aria-label="Example API request and response">
+            <figcaption class="terminal-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="terminal-title mono">airdb — curl</span>
+            </figcaption>
+            <pre class="mono"><code><span class="t-dim">$</span> curl https://api.airdb.io/v1/prices \
+    <span class="t-dim">-H</span> <span class="t-str">"Authorization: Bearer $AIRDB_KEY"</span> \
+    <span class="t-dim">-d</span> commodity=apple <span class="t-dim">-d</span> region=CN-HZ
+
+<span class="t-dim">HTTP/2 200 · 43ms</span>
+&#123;
+  <span class="t-key">"commodity"</span>: <span class="t-str">"apple"</span>,
+  <span class="t-key">"region"</span>:    <span class="t-str">"CN-HZ"</span>,   <span class="t-dim">// Hangzhou</span>
+  <span class="t-key">"unit"</span>:      <span class="t-str">"USD/kg"</span>,
+  <span class="t-key">"series"</span>: [
+    &#123; <span class="t-key">"date"</span>: <span class="t-str">"2026-07-06"</span>, <span class="t-key">"price"</span>: <span class="t-num">0.94</span> &#125;,
+    &#123; <span class="t-key">"date"</span>: <span class="t-str">"2026-07-07"</span>, <span class="t-key">"price"</span>: <span class="t-num">0.97</span> &#125;,
+    &#123; <span class="t-key">"date"</span>: <span class="t-str">"2026-07-08"</span>, <span class="t-key">"price"</span>: <span class="t-num">1.02</span> &#125;
+  ],
+  <span class="t-key">"next_cursor"</span>: <span class="t-str">"eyJvZmZzZXQi…"</span>
+&#125;</code></pre>
+          </figure>
+        </div>
+
+        <div class="shell">
+          <dl class="stat-strip reveal">
+            {STATS.map((s) => (
+              <div class="stat">
+                <dt class="mono">{s.value}</dt>
+                <dd>{s.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <!-- ============ PLATFORM ============ -->
+      <section class="platform" id="platform">
+        <div class="shell">
+          <header class="section-head">
+            <p class="eyebrow">The platform</p>
+            <h2>Six products. <span class="ital">One data layer.</span></h2>
+            <p class="section-lede">
+              Everything between raw collection and the chart in your boardroom,
+              run as managed services with a single account and a single bill.
+            </p>
+          </header>
+          <div class="cap-grid">
+            {CAPABILITIES.map((c) => (
+              <article class="cap-card">
+                <span class="cap-no mono">{c.no}</span>
+                <h3>{c.title}</h3>
+                <p>{c.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DATA API ============ -->
+      <section class="api" id="api">
+        <div class="shell api-grid">
+          <div class="api-copy">
+            <p class="eyebrow eyebrow-light">Data API</p>
+            <h2>Built to be <span class="ital">integrated,</span> not just browsed.</h2>
+            <p>
+              Every dataset ships with a typed schema, stable identifiers, and honest metadata —
+              coverage, cadence, and lineage. Query it live, export it in bulk, or subscribe to
+              changes with webhooks.
+            </p>
+            <ul class="api-points">
+              <li>REST + bulk parquet export from the same catalog</li>
+              <li>Cursor pagination, ETags, and idempotent retries</li>
+              <li>Row-level licensing — resell-safe by design</li>
+              <li>Keys, quotas, and audit logs per environment</li>
+            </ul>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-tabs" role="tablist" aria-label="Code examples">
+              <button class="mono active" role="tab" aria-selected="true" data-tab="python">Python</button>
+              <button class="mono" role="tab" aria-selected="false" data-tab="node">TypeScript</button>
+              <button class="mono" role="tab" aria-selected="false" data-tab="curl">curl</button>
+            </div>
+            <pre class="mono code-sample active" data-panel="python"><code><span class="t-kw">from</span> airdb <span class="t-kw">import</span> Client
+
+db = Client()  <span class="t-dim"># reads AIRDB_KEY</span>
+
+frame = db.datasets(<span class="t-str">"agri/apple-prices"</span>) \
+          .filter(region=<span class="t-str">"CN-HZ"</span>, freq=<span class="t-str">"daily"</span>) \
+          .to_pandas()
+
+frame[<span class="t-str">"price"</span>].rolling(<span class="t-num">7</span>).mean().plot()</code></pre>
+            <pre class="mono code-sample" data-panel="node"><code><span class="t-kw">import</span> &#123; AirDB &#125; <span class="t-kw">from</span> <span class="t-str">"@airdb/sdk"</span>;
+
+<span class="t-kw">const</span> db = <span class="t-kw">new</span> AirDB();
+
+<span class="t-kw">const</span> rows = <span class="t-kw">await</span> db
+  .dataset(<span class="t-str">"agri/apple-prices"</span>)
+  .filter(&#123; region: <span class="t-str">"CN-HZ"</span>, freq: <span class="t-str">"daily"</span> &#125;)
+  .rows();</code></pre>
+            <pre class="mono code-sample" data-panel="curl"><code>curl https://api.airdb.io/v1/datasets/agri/apple-prices/rows \
+  -H <span class="t-str">"Authorization: Bearer $AIRDB_KEY"</span> \
+  -d region=CN-HZ -d freq=daily</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRICING ============ -->
+      <section class="pricing" id="pricing">
+        <div class="shell">
+          <header class="section-head">
+            <p class="eyebrow">Pricing</p>
+            <h2>Start free. <span class="ital">Scale on usage.</span></h2>
+            <p class="section-lede">
+              Transparent, usage-based pricing in USD. Annual billing saves two months.
+            </p>
+          </header>
+          <div class="plan-grid">
+            {PLANS.map((p) => (
+              <article class:list={["plan", p.featured && "plan-featured"]}>
+                {p.featured && <span class="plan-flag mono">Most popular</span>}
+                <h3>{p.name}</h3>
+                <p class="plan-price">
+                  <strong>{p.price}</strong>
+                  <span class="mono">/ {p.period}</span>
+                </p>
+                <p class="plan-tagline">{p.tagline}</p>
+                <ul>
+                  {p.features.map((f) => <li>{f}</li>)}
+                </ul>
+                <a class:list={["btn", p.featured ? "btn-solid" : "btn-ghost", "btn-block"]} href="mailto:sales@airdb.io">
+                  {p.cta}
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DOCS ============ -->
+      <section class="docs" id="docs">
+        <div class="shell">
+          <header class="section-head">
+            <p class="eyebrow">Developers</p>
+            <h2>Documentation that <span class="ital">respects your time.</span></h2>
+          </header>
+          <div class="docs-grid">
+            {DOCS.map((d) => (
+              <a class="doc-card" href={d.href}>
+                <span class="doc-tag mono">{d.tag}</span>
+                <h3>{d.title} <span aria-hidden="true">→</span></h3>
+                <p>{d.copy}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CTA ============ -->
+      <section class="cta-band">
+        <div class="shell cta-inner">
+          <h2>Put your product on <span class="ital">solid ground.</span></h2>
+          <p>Talk to us about datasets, the data hub, or a private deployment.</p>
+          <div class="hero-actions">
+            <a class="btn btn-paper" href="mailto:sales@airdb.io">Talk to sales</a>
+            <a class="btn btn-ghost-light" href="#pricing">See pricing</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-grid">
+        <div class="footer-brand">
+          <p class="wordmark">air<em>db</em></p>
+          <p>
+            AirDB is the data-products arm of
+            <a href="https://airdb.group" rel="noopener">AirDB Group</a> —
+            building digital infrastructure for agriculture and supply chains.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h3 class="mono">Product</h3>
+          <a href="#platform">Platform</a>
+          <a href="#api">Data API</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <div class="footer-col">
+          <h3 class="mono">Developers</h3>
+          <a href="#docs">Documentation</a>
+          <a href="#docs">Dataset catalog</a>
+          <a href="#docs">SDKs</a>
+        </div>
+        <div class="footer-col">
+          <h3 class="mono">Company</h3>
+          <a href="https://airdb.group" rel="noopener">AirDB Group</a>
+          <a href="mailto:sales@airdb.io">Contact sales</a>
+          <a href="/cc/about/">About</a>
+        </div>
+      </div>
+      <div class="shell footer-legal mono">
+        <span>© {YEAR} AirDB. All rights reserved.</span>
+        <span>status.airdb.io · api.airdb.io</span>
+      </div>
+    </footer>
+
+    <script>
+      // Code-sample tabs
+      const tabs = document.querySelectorAll<HTMLButtonElement>(".code-tabs [data-tab]");
+      const panels = document.querySelectorAll<HTMLElement>(".code-sample");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => {
+            t.classList.toggle("active", t === tab);
+            t.setAttribute("aria-selected", String(t === tab));
+          });
+          panels.forEach((p) => p.classList.toggle("active", p.dataset.panel === tab.dataset.tab));
+        });
+      });
+
+      // Scroll-triggered reveals outside the hero
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.01, rootMargin: "0px 0px -8% 0px" }
+      );
+      document
+        .querySelectorAll(".cap-card, .plan, .doc-card, .section-head")
+        .forEach((el) => {
+          el.classList.add("will-reveal");
+          observer.observe(el);
+        });
+    </script>
+
+    <style>
+      /* ============ Foundations ============ */
+      :root {
+        --paper: #faf6ee;
+        --paper-deep: #f2ecdf;
+        --ink: #17281d;
+        --ink-soft: #46584c;
+        --green: #1d5c3f;
+        --green-deep: #123b28;
+        --amber: #d98e2b;
+        --amber-soft: #f3d9ad;
+        --terminal: #0e1f16;
+        --terminal-line: #1d3a2b;
+        --phosphor: #8fe6b0;
+        --rule: #d9d0bd;
+        --serif: "Fraunces", "Georgia", serif;
+        --sans: "IBM Plex Sans", "Helvetica Neue", sans-serif;
+        --mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: var(--sans);
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      .shell { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+      .mono { font-family: var(--mono); }
+      .ital { font-style: italic; color: var(--green); }
+      h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.12; letter-spacing: -0.01em; }
+
+      .skip-link {
+        position: absolute; left: -999px; top: 8px; z-index: 99;
+        background: var(--ink); color: var(--paper); padding: 8px 16px; border-radius: 4px;
+      }
+      .skip-link:focus { left: 8px; }
+
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-bottom: 18px;
+      }
+      .eyebrow::before { content: "// "; color: var(--amber); }
+      .eyebrow-light { color: var(--phosphor); }
+
+      /* ============ Buttons ============ */
+      .btn {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 0.92rem;
+        font-weight: 500;
+        padding: 13px 26px;
+        border-radius: 3px;
+        text-decoration: none;
+        border: 1.5px solid transparent;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      }
+      .btn:hover { transform: translateY(-2px); }
+      .btn-sm { padding: 9px 18px; font-size: 0.82rem; }
+      .btn-solid {
+        background: var(--green);
+        color: var(--paper);
+        box-shadow: 3px 3px 0 var(--amber);
+      }
+      .btn-solid:hover { background: var(--green-deep); box-shadow: 5px 5px 0 var(--amber); }
+      .btn-ghost { border-color: var(--ink); color: var(--ink); }
+      .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+      .btn-paper { background: var(--paper); color: var(--green-deep); box-shadow: 3px 3px 0 var(--amber); }
+      .btn-ghost-light { border-color: var(--paper); color: var(--paper); }
+      .btn-ghost-light:hover { background: var(--paper); color: var(--green-deep); }
+      .btn-block { display: block; text-align: center; margin-top: auto; }
+
+      /* ============ Topbar ============ */
+      .topbar {
+        position: sticky; top: 0; z-index: 50;
+        background: color-mix(in srgb, var(--paper) 88%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--rule);
+      }
+      .topbar-inner { display: flex; align-items: center; gap: 32px; height: 64px; }
+      .wordmark {
+        font-family: var(--serif); font-size: 1.45rem; font-weight: 600;
+        color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
+      }
+      .wordmark em { font-style: italic; color: var(--green); }
+      .wordmark-glyph { color: var(--amber); margin-right: 2px; }
+      .topnav { display: flex; gap: 26px; margin-left: 12px; }
+      .topnav a {
+        font-family: var(--mono); font-size: 0.85rem; color: var(--ink-soft);
+        text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent;
+      }
+      .topnav a:hover { color: var(--green); border-bottom-color: var(--amber); }
+      .topbar-actions { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+      .group-link {
+        font-family: var(--mono); font-size: 0.82rem;
+        color: var(--ink-soft); text-decoration: none;
+      }
+      .group-link:hover { color: var(--green); }
+
+      /* ============ Hero ============ */
+      .hero { position: relative; padding: 88px 0 56px; overflow: hidden; }
+      .hero-field {
+        position: absolute; inset: 0; pointer-events: none;
+        background:
+          repeating-linear-gradient(
+            105deg,
+            transparent 0 90px,
+            color-mix(in srgb, var(--green) 6%, transparent) 90px 91px
+          );
+        mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
+      }
+      .hero-grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        gap: 56px;
+        align-items: center;
+      }
+      .hero h1 { font-size: clamp(2.6rem, 5.2vw, 4rem); margin-bottom: 22px; }
+      .lede { font-size: 1.13rem; color: var(--ink-soft); max-width: 34em; margin-bottom: 30px; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+      .hero-note { margin-top: 18px; font-size: 0.85rem; color: var(--ink-soft); }
+      .hero-note .mono { color: var(--green); }
+
+      /* Terminal */
+      .terminal {
+        background: var(--terminal);
+        border: 1px solid var(--terminal-line);
+        border-radius: 10px;
+        box-shadow: 8px 10px 0 color-mix(in srgb, var(--green) 18%, transparent);
+        transform: rotate(0.6deg);
+        overflow: hidden;
+      }
+      .terminal-bar {
+        display: flex; align-items: center; gap: 7px;
+        padding: 11px 16px; border-bottom: 1px solid var(--terminal-line);
+      }
+      .terminal-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--terminal-line); }
+      .terminal-bar .dot:first-child { background: var(--amber); }
+      .terminal-title { margin-left: auto; font-size: 0.72rem; color: #557a63; }
+      .terminal pre {
+        padding: 20px 22px; font-size: 0.8rem; line-height: 1.65;
+        color: var(--phosphor); overflow-x: auto;
+      }
+      .t-dim { color: #557a63; }
+      .t-str { color: #ffd489; }
+      .t-key { color: #b7f2cd; }
+      .t-num { color: #ffb35c; }
+      .t-kw { color: #8ecbff; }
+
+      /* Stats */
+      .stat-strip {
+        display: grid; grid-template-columns: repeat(4, 1fr);
+        border-block: 1px solid var(--rule);
+        margin-top: 64px;
+      }
+      .stat { padding: 26px 22px; border-left: 1px solid var(--rule); }
+      .stat:first-child { border-left: none; padding-left: 0; }
+      .stat dt { font-size: 1.7rem; font-weight: 600; color: var(--green); }
+      .stat dd { font-size: 0.85rem; color: var(--ink-soft); margin-top: 4px; }
+
+      /* ============ Sections ============ */
+      section { padding: 96px 0; }
+      .section-head { max-width: 620px; margin-bottom: 56px; }
+      .section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.7rem); }
+      .section-lede { margin-top: 16px; color: var(--ink-soft); font-size: 1.05rem; }
+
+      /* Platform */
+      .platform { background: var(--paper-deep); border-block: 1px solid var(--rule); }
+      .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+      .cap-card {
+        background: var(--paper-deep);
+        padding: 32px 28px 36px;
+        position: relative;
+        transition: background 0.25s ease;
+      }
+      .cap-card:hover { background: var(--paper); }
+      .cap-card:hover .cap-no { color: var(--amber); }
+      .cap-no { font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.1em; transition: color 0.25s ease; }
+      .cap-card h3 { font-size: 1.28rem; margin: 14px 0 10px; }
+      .cap-card p { font-size: 0.93rem; color: var(--ink-soft); }
+
+      /* API */
+      .api { background: var(--terminal); color: #d9efe0; }
+      .api-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 64px; align-items: center; }
+      .api h2 { color: #f2faf4; font-size: clamp(1.9rem, 3.4vw, 2.5rem); margin-bottom: 18px; }
+      .api .ital { color: var(--phosphor); }
+      .api p { color: #a8c4b2; }
+      .api-points { list-style: none; margin-top: 26px; display: grid; gap: 12px; }
+      .api-points li { padding-left: 26px; position: relative; font-size: 0.95rem; }
+      .api-points li::before {
+        content: "▪"; position: absolute; left: 0; color: var(--amber);
+      }
+      .code-panel {
+        border: 1px solid var(--terminal-line); border-radius: 10px; overflow: hidden;
+        background: #0a1811;
+      }
+      .code-tabs { display: flex; border-bottom: 1px solid var(--terminal-line); }
+      .code-tabs button {
+        background: none; border: none; cursor: pointer;
+        padding: 12px 20px; font-size: 0.8rem; color: #557a63;
+        border-right: 1px solid var(--terminal-line);
+        border-bottom: 2px solid transparent;
+      }
+      .code-tabs button.active { color: var(--phosphor); border-bottom-color: var(--amber); }
+      .code-sample { display: none; padding: 22px 24px; font-size: 0.82rem; line-height: 1.7; color: #cfe9d8; overflow-x: auto; }
+      .code-sample.active { display: block; }
+
+      /* Pricing */
+      .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+      .plan {
+        display: flex; flex-direction: column;
+        border: 1.5px solid var(--rule); border-radius: 8px;
+        padding: 34px 30px; background: var(--paper);
+        position: relative;
+      }
+      .plan-featured {
+        border-color: var(--green);
+        box-shadow: 8px 8px 0 var(--amber-soft);
+        background: #fffdf7;
+      }
+      .plan-flag {
+        position: absolute; top: -12px; left: 28px;
+        background: var(--amber); color: var(--green-deep);
+        font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 3px 10px; border-radius: 3px;
+      }
+      .plan h3 { font-size: 1.35rem; }
+      .plan-price { margin: 14px 0 4px; display: flex; align-items: baseline; gap: 8px; }
+      .plan-price strong { font-family: var(--serif); font-size: 2.4rem; font-weight: 600; color: var(--green); }
+      .plan-price .mono { font-size: 0.78rem; color: var(--ink-soft); }
+      .plan-tagline { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 20px; }
+      .plan ul { list-style: none; display: grid; gap: 10px; margin-bottom: 30px; }
+      .plan li { padding-left: 24px; position: relative; font-size: 0.92rem; }
+      .plan li::before { content: "✓"; position: absolute; left: 0; color: var(--amber); font-weight: 700; }
+
+      /* Docs */
+      .docs { background: var(--paper-deep); border-block: 1px solid var(--rule); }
+      .docs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+      .doc-card {
+        display: block; text-decoration: none; color: inherit;
+        border: 1px solid var(--rule); border-radius: 8px;
+        padding: 24px 22px 28px; background: var(--paper);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      }
+      .doc-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--green);
+        box-shadow: 5px 6px 0 var(--amber-soft);
+      }
+      .doc-tag { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); }
+      .doc-card h3 { font-size: 1.12rem; margin: 12px 0 8px; }
+      .doc-card h3 span { color: var(--amber); }
+      .doc-card p { font-size: 0.87rem; color: var(--ink-soft); }
+
+      /* CTA band */
+      .cta-band { background: var(--green-deep); color: var(--paper); }
+      .cta-inner { text-align: center; max-width: 640px; }
+      .cta-band h2 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 14px; }
+      .cta-band .ital { color: var(--amber-soft); }
+      .cta-band p { color: #bcd6c5; margin-bottom: 30px; }
+      .cta-band .hero-actions { justify-content: center; }
+
+      /* Footer */
+      .footer { background: var(--terminal); color: #a8c4b2; padding: 64px 0 32px; }
+      .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
+      .footer-brand .wordmark { color: var(--paper); margin-bottom: 14px; }
+      .footer-brand p { font-size: 0.9rem; max-width: 30em; }
+      .footer-brand a { color: var(--phosphor); }
+      .footer-col h3 {
+        font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+        color: #557a63; margin-bottom: 16px; font-weight: 500;
+      }
+      .footer-col a {
+        display: block; color: #cfe9d8; text-decoration: none;
+        font-size: 0.9rem; margin-bottom: 10px;
+      }
+      .footer-col a:hover { color: var(--amber-soft); }
+      .footer-legal {
+        display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+        margin-top: 48px; padding-top: 22px;
+        border-top: 1px solid var(--terminal-line);
+        font-size: 0.75rem; color: #557a63;
+      }
+
+      /* ============ Motion ============ */
+      .reveal { opacity: 0; transform: translateY(18px); animation: rise 0.7s ease forwards; }
+      .hero-copy .reveal:nth-child(1) { animation-delay: 0.05s; }
+      .hero-copy .reveal:nth-child(2) { animation-delay: 0.15s; }
+      .hero-copy .reveal:nth-child(3) { animation-delay: 0.25s; }
+      .hero-copy .reveal:nth-child(4) { animation-delay: 0.35s; }
+      .hero-copy .reveal:nth-child(5) { animation-delay: 0.45s; }
+      .terminal.reveal { animation-delay: 0.3s; }
+      .stat-strip.reveal { animation-delay: 0.5s; }
+      @keyframes rise { to { opacity: 1; transform: translateY(0) rotate(var(--tilt, 0deg)); } }
+      .terminal.reveal { --tilt: 0.6deg; }
+
+      .will-reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
+      .will-reveal.in-view { opacity: 1; transform: none; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal, .will-reveal { opacity: 1; transform: none; animation: none; transition: none; }
+      }
+
+      /* ============ Responsive ============ */
+      @media (max-width: 960px) {
+        .hero-grid, .api-grid { grid-template-columns: 1fr; gap: 40px; }
+        .terminal { transform: none; }
+        .cap-grid { grid-template-columns: repeat(2, 1fr); }
+        .docs-grid { grid-template-columns: repeat(2, 1fr); }
+        .plan-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+        .footer-grid { grid-template-columns: 1fr 1fr; }
+        .stat-strip { grid-template-columns: repeat(2, 1fr); }
+        .stat:nth-child(odd) { border-left: none; padding-left: 0; }
+        .topnav { display: none; }
+      }
+      @media (max-width: 560px) {
+        .cap-grid, .docs-grid { grid-template-columns: 1fr; }
+        .stat-strip { grid-template-columns: 1fr 1fr; }
+        .group-link { display: none; }
+        section { padding: 72px 0; }
+      }
+    </style>
+  </body>
+</html>
