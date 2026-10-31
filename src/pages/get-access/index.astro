@@ -4,32 +4,24 @@ import ProductLayout from "../../layouts/ProductLayout.astro";
 
 <ProductLayout
   title="Get API access — AirDB"
-  description="Request an AirDB API key: free developer tier, Team trial, or an Enterprise conversation. We reply within one business day."
+  description="Request an AirDB API key: free developer tier, Team trial, or an Enterprise conversation. Contact us by email to confirm availability."
   path="/get-access/"
 >
   <div class="shell page-hero">
-    <p class="notice">Early access · we onboard new accounts in weekly batches</p>
+    <p class="notice">Early access · email inquiry</p>
     <h1>Get API access</h1>
     <p class="lede">
-      Tell us what you are building and we will set up your workspace and API key.
-      We reply within one business day.
+      Prepare an email describing what you are building. This page does not submit requests or issue API keys.
+      Contact us by email to confirm availability.
     </p>
   </div>
 
   <div class="shell form-wrap">
     <form
       name="api-access"
-      method="POST"
-      action="/get-access/thanks/"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
+      id="access-draft"
       class="form-grid"
     >
-      <input type="hidden" name="form-name" value="api-access" />
-      <p hidden aria-hidden="true">
-        <label>Leave this field empty: <input name="bot-field" /></label>
-      </p>
-
       <div class="field">
         <label for="name">Name <span class="req">*</span></label>
         <input id="name" name="name" type="text" required autocomplete="name" />
@@ -64,15 +56,29 @@ import ProductLayout from "../../layouts/ProductLayout.astro";
         ></textarea>
       </div>
 
-      <button class="btn btn-solid" type="submit">Request access</button>
+      <button class="btn btn-solid" type="button" id="prepare-email">Prepare email</button>
       <p class="hint">
         Prefer email? Write to <a href="mailto:info@airdb.com">info@airdb.com</a>.
-        We never share your details outside AirDB Group.
+        Nothing is sent until you send the message from your email app.
       </p>
+      <p id="draft-result" class="hint" role="status" hidden><a id="draft-link" href="mailto:info@airdb.com">Open email draft</a>. Review and send it in your email app. No request has been received yet.</p>
     </form>
+    <noscript><style>#access-draft { display: none; }</style><p>Email your access request to <a href="mailto:info@airdb.com">info@airdb.com</a>.</p></noscript>
   </div>
 
   <script>
+    const form = document.querySelector<HTMLFormElement>('#access-draft');
+    form?.addEventListener('submit', (event) => event.preventDefault());
+    document.getElementById('prepare-email')?.addEventListener('click', () => {
+      if (!form?.reportValidity()) return;
+      const values = new FormData(form);
+      const body = ['name', 'email', 'company', 'plan', 'usecase'].map((key) => `${key}: ${values.get(key) ?? ''}`).join('\n');
+      const link = document.querySelector<HTMLAnchorElement>('#draft-link');
+      if (link) link.href = `mailto:info@airdb.com?subject=${encodeURIComponent('AirDB API access inquiry')}&body=${encodeURIComponent(body)}`;
+      const result = document.getElementById('draft-result');
+      if (result) result.hidden = false;
+    });
+
     // Pre-select the plan from ?plan= links on the pricing section
     const plan = new URLSearchParams(location.search).get("plan");
     const select = document.getElementById("plan") as HTMLSelectElement | null;

@@ -7,9 +7,10 @@ interface Props {
   /** Path for canonical URL, e.g. "/docs/" */
   path?: string;
   ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title, description, path = "/", ogImage = "/og/home.png" } = Astro.props;
+const { noindex = false, title, description, path = "/", ogImage = "/og/home.png" } = Astro.props;
 const site = Astro.site ?? new URL("https://airdb.io");
 const canonical = new URL(path, site).href;
 const ogImageUrl = new URL(ogImage, site).href;
@@ -41,7 +42,7 @@ const jsonLd = JSON.stringify({
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="AirDB" />
