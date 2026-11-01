@@ -411,7 +411,8 @@ section { padding: 96px 0; }
 }
 
 .doc-body { padding: 56px 0 96px; }
-.doc-section { max-width: 720px; padding: 0 0 64px; }
+/* Clear the 65px sticky topbar with 15px of breathing room on anchor jumps. */
+.doc-section { max-width: 720px; padding: 0 0 64px; scroll-margin-top: 80px; }
 .doc-section:last-child { padding-bottom: 0; }
 .doc-section h2 {
   font-size: 1.7rem; margin-bottom: 8px;
