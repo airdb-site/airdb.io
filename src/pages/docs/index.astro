@@ -19,9 +19,9 @@ const DATASETS = [
 ];
 
 const SDKS = [
-  { name: "Python", pkg: "pip install airdb", status: "beta" },
-  { name: "TypeScript", pkg: "npm install @airdb/sdk", status: "beta" },
-  { name: "Go", pkg: "go get airdb.io/sdk-go", status: "planned" },
+  { name: "Python" },
+  { name: "TypeScript" },
+  { name: "Go" },
 ];
 ---
 
@@ -142,20 +142,19 @@ curl https://api.airdb.io/v1/prices \
     <section class="doc-section" id="sdks">
       <h2><span class="sec-no">04 · LIBRARIES</span>SDKs</h2>
       <p>
-        Official clients wrap auth, pagination, retries, and typed schemas.
-        The REST API is always the source of truth.
+        Contact us to confirm supported SDKs, versions, and installation instructions for your integration.
       </p>
       <div class="table-scroll" tabindex="0">
         <table class="doc-table">
           <thead>
-            <tr><th scope="col">Language</th><th scope="col">Install</th><th scope="col">Status</th></tr>
+            <tr><th scope="col">Language</th><th scope="col">Versions</th><th scope="col">Installation</th></tr>
           </thead>
           <tbody>
             {SDKS.map((s) => (
               <tr>
                 <td>{s.name}</td>
-                <td><code>{s.pkg}</code></td>
-                <td><span class:list={["pill", s.status !== "planned" && "pill-live"]}>{s.status}</span></td>
+                <td><span class="pill">Contact to confirm</span></td>
+                <td><a href="/get-access/">Discuss SDK integration</a></td>
               </tr>
             ))}
           </tbody>
